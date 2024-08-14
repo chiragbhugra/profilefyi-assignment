@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useCartStore from '../store/cartStore';
 import Button from './Button';
 import Counter from './Counter';
+import { toast } from 'react-toastify';
 
 const Checkout = () => {
   const { items, getCartTotal, updateQuantity, removeItem } = useCartStore();
@@ -17,7 +18,7 @@ const Checkout = () => {
     let total = subtotal + tax + shipping;
 
     if (appliedCoupon) {
-      discount = subtotal * 0.05; // 5% discount
+      discount = subtotal * 0.1; // 10% discount
       total = total - discount;
     }
 
@@ -31,11 +32,15 @@ const Checkout = () => {
   }, [items, getCartTotal, appliedCoupon]);
 
   const applyCoupon = () => {
-    if (couponCode.toLowerCase() === 'discount5') {
-      setAppliedCoupon({ code: couponCode, value: 0.05 });
+    console.log('applyCoupon called', couponCode);
+    if (couponCode.toLowerCase() === 'discount10') {
+      setAppliedCoupon({ code: couponCode, value: 0.1 });
+      toast.success('Coupon applied successfully!');
     } else {
       setAppliedCoupon(null);
+      toast.error('Invalid coupon code.');
     }
+    setCouponCode(''); // Clear the input field after applying
   };
 
   const handleQuantityChange = (itemId, change) => {
@@ -127,7 +132,7 @@ const Checkout = () => {
             </div>
             {appliedCoupon && (
               <div className="flex justify-between mb-2 text-green-600">
-                <span>Discount (5%)</span>
+                <span>Discount (10%)</span>
                 <span>-${calculations.discount.toFixed(2)}</span>
               </div>
             )}
