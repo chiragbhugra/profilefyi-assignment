@@ -94,28 +94,6 @@ const Checkout = () => {
         </div>
         <div className="lg:w-1/3">
           <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">Calculated Shipping</h2>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
-              <select className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                <option>Select Country</option>
-              </select>
-            </div>
-            <div className="flex gap-4 mb-4">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">State/City</label>
-                <select className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                  <option>Select State/City</option>
-                </select>
-              </div>
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">ZIP Code</label>
-                <input type="text" className="w-full p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="ZIP Code" />
-              </div>
-            </div>
-            <Button variant="primary" className="w-full">Update</Button>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6 mb-4">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Coupon Code</h2>
             <p className="text-sm text-gray-500 mb-4">Enter your coupon code if you have one</p>
             <div className="flex gap-2">
