@@ -12,8 +12,8 @@ const Cart = ({ setIsCartOpen }) => {
   };
 
   return (
-    <div className="bg-white shadow-xl rounded-lg p-4 max-w-md mx-auto max-h-[80vh] flex flex-col" role="dialog" aria-label="Shopping Cart">
-      <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
+    <div className="bg-white shadow-xl rounded-lg p-4 w-full max-w-md mx-auto max-h-[80vh] flex flex-col" role="dialog" aria-label="Shopping Cart">
+      <h2 className="text-xl sm:text-2xl font-bold mb-4">Your Cart</h2>
       {items.length === 0 ? (
         <p className="text-center py-4">Your cart is empty.</p>
       ) : (
@@ -24,23 +24,23 @@ const Cart = ({ setIsCartOpen }) => {
             ))}
           </div>
           <div className="border-t border-gray-200 pt-4">
-            <div className="flex justify-between text-lg font-bold">
+            <div className="flex justify-between text-base sm:text-lg font-bold">
               <span>Total:</span>
               <span>${getCartTotal().toFixed(2)}</span>
             </div>
             <Button 
               onClick={clearCart}
               variant="danger"
-              className="mt-4 w-full"
+              className="mt-4 w-full text-sm sm:text-base"
               ariaLabel="Clear Cart"
             >
               Clear Cart
             </Button>
-            <Link to="/checkout">
+            <Link to="/checkout" className="block w-full">
               <Button 
                 onClick={handleProceedToCheckout}
                 variant="primary"
-                className="mt-2 w-full"
+                className="mt-2 w-full text-sm sm:text-base"
                 ariaLabel="Proceed to Checkout"
               >
                 Proceed to Checkout

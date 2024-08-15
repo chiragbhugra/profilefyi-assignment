@@ -51,50 +51,74 @@ const Checkout = () => {
     }
   };
 
+  // Function to truncate title
+  const truncateTitle = (title, maxLength) => {
+    return title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
+  };
+
+  if (items.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">Your Cart is Empty</h1>
+        <p className="mb-8 text-gray-600">Click the button below to navigate to the shopping page.</p>
+        <Link to="/">
+          <Button variant="primary" ariaLabel="Go to Shopping Page">
+            Go to Shopping Page
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">Shopping Bag</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-gray-800">Shopping Bag</h1>
       <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-2/3">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">{items.length} items in your bag</h2>
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-2 text-gray-600">Product</th>
-                  <th className="text-right py-2 text-gray-600">Price</th>
-                  <th className="text-center py-2 text-gray-600">Quantity</th>
-                  <th className="text-right py-2 text-gray-600">Total Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map(item => (
-                  <tr key={item.id} className="border-b">
-                    <td className="py-4">
-                      <div className="flex items-center">
-                        <img src={item.image} alt={item.title} className="w-16 h-16 object-cover mr-4 rounded-md" />
-                        <div>
-                          <h3 className="font-medium text-gray-800">{item.title}</h3>
-                          <p className="text-sm text-gray-500">Color: {item.color || 'N/A'}</p>
-                          <p className="text-sm text-gray-500">Size: {item.size || 'N/A'}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="text-right py-4 text-gray-700">${item.price.toFixed(2)}</td>
-                    <td className="text-center py-4">
-                      <div className="flex items-center justify-center">
-                        <Counter
-                          quantity={item.quantity}
-                          onIncrease={() => handleQuantityChange(item.id, 1)}
-                          onDecrease={() => handleQuantityChange(item.id, -1)}
-                        />
-                      </div>
-                    </td>
-                    <td className="text-right py-4 font-medium text-indigo-600">${(item.price * item.quantity).toFixed(2)}</td>
+        <div className="w-full lg:w-2/3">
+          <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4 text-gray-700">{items.length} items in your bag</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="hidden sm:table-header-group">
+                  <tr className="border-b">
+                    <th className="text-left py-2 text-gray-600">Product</th>
+                    <th className="text-right py-2 text-gray-600">Price</th>
+                    <th className="text-center py-2 text-gray-600">Quantity</th>
+                    <th className="text-right py-2 text-gray-600">Total Price</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {items.map(item => (
+                    <tr key={item.id} className="border-b sm:border-none">
+                      <td className="py-4">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center">
+                          <img src={item.image} alt={item.title} className="w-16 h-16 object-cover mr-0 sm:mr-4 mb-2 sm:mb-0 rounded-md" />
+                          <div>
+                            <h3 className="font-medium text-gray-800">
+                              <span className="hidden sm:inline">{item.title}</span>
+                              <span className="sm:hidden">{truncateTitle(item.title, 20)}</span>
+                            </h3>
+                            <p className="text-sm text-gray-500">Color: {item.color || 'N/A'}</p>
+                            <p className="text-sm text-gray-500">Size: {item.size || 'N/A'}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="text-right py-4 text-gray-700">${item.price.toFixed(2)}</td>
+                      <td className="text-center py-4">
+                        <div className="flex items-center justify-center">
+                          <Counter
+                            quantity={item.quantity}
+                            onIncrease={() => handleQuantityChange(item.id, 1)}
+                            onDecrease={() => handleQuantityChange(item.id, -1)}
+                          />
+                        </div>
+                      </td>
+                      <td className="text-right py-4 font-medium text-indigo-600">${(item.price * item.quantity).toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div className="lg:w-1/3">
@@ -109,8 +133,9 @@ const Checkout = () => {
                 className="flex-1 p-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Enter coupon code"
               />
-              <Button onClick={applyCoupon} variant="primary">Apply</Button>
-            </div>
+                <Button onClick={applyCoupon} variant="primary">Apply</Button>
+              </div>
+              <p className=" text-sm text-gray-400">discount10</p>
           </div>
           <div className="bg-indigo-50 rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Cart Total</h2>

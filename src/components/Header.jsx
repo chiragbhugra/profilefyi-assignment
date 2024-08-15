@@ -32,16 +32,20 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-white shadow-md transition-shadow duration-300">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/46190b63764575.5abb892616e9e.jpg" alt="Logo" className="w-12 h-12 rounded-full mr-2 cursor-pointer" />
-          <h2 className="text-xl font-bold text-primary">Fake Shop</h2>
+          <Link to= "/" >
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/hd/46190b63764575.5abb892616e9e.jpg" 
+          alt="Logo" 
+          className="w-14 h-14 rounded-full mr-2 cursor-pointer" />
+          
+          </Link>
         </div>
-        <nav>
+        {/* <nav>
           <ul className="flex space-x-6">
             <li><Link to="/" className="text-secondary hover:text-primary transition-colors duration-300">Home</Link></li>
             <li><Link to="/about" className="text-secondary hover:text-primary transition-colors duration-300">About</Link></li>
             <li><Link to="/contact" className="text-secondary hover:text-primary transition-colors duration-300">Contact</Link></li>
           </ul>
-        </nav>
+        </nav> */}
         <div className="relative" ref={cartRef}>
           <button 
             onClick={handleCartToggle}

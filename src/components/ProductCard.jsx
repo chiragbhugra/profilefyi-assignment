@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
         <img 
           src={product.image} 
           alt={product.title}
-          className="absolute inset-0 w-full h-full object-contain p-4"
+          className="absolute inset-0 w-full h-full object-contain p-4 bg-white"
         />
       </div>
       <div className="p-4 flex-grow flex flex-col justify-between">

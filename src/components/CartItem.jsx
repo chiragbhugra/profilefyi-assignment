@@ -10,13 +10,22 @@ const CartItem = ({ item }) => {
     updateQuantity(item.id, newQuantity);
   };
 
+  // Function to truncate title
+  const truncateTitle = (title, maxLength) => {
+    return title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
+  };
+
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-200">
       <div className="flex items-center">
         <img src={item.image} alt={item.title} className="w-16 h-16 object-cover mr-4" />
         <div>
-          <h3 className="text-sm font-medium text-gray-900">{item.title}</h3>
-          <p className="text-sm text-gray-500">${item.price}</p>
+          <h3 className="text-sm font-medium text-gray-900">
+            <span className="hidden sm:inline">{item.title}</span>
+            <span className="sm:hidden">{truncateTitle(item.title, 20)}</span>
+          </h3>
+          <p className="text-sm text-gray-500">{item.color && `Color: ${item.color}`}</p>
+          <p className="text-sm text-gray-500">{item.size && `, Size: ${item.size}`}</p>
         </div>
       </div>
       <div className="flex items-center">
